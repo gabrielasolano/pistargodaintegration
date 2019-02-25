@@ -184,7 +184,7 @@ ui.defineInteractions = function() {
             }
         }
         else {
-            oldText = cellView.model.attr('text/text').replace(/(\r\n|\n|\r)/gm,' ');
+            oldText = cellView.model.attr('text/text').replace(/(\r\n|\n|\r)/gm,'');
             newText = window.prompt('Edit text:', oldText);
             if (newText !== null) {
                 cellView.model.changeNodeContent(newText);

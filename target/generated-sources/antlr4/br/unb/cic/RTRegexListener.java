@@ -9,17 +9,17 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface RTRegexListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by the {@code parens}
+	 * Enter a parse tree produced by the {@code gDM}
 	 * labeled alternative in {@link RTRegexParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterParens(@NotNull RTRegexParser.ParensContext ctx);
+	void enterGDM(@NotNull RTRegexParser.GDMContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code parens}
+	 * Exit a parse tree produced by the {@code gDM}
 	 * labeled alternative in {@link RTRegexParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitParens(@NotNull RTRegexParser.ParensContext ctx);
+	void exitGDM(@NotNull RTRegexParser.GDMContext ctx);
 
 	/**
 	 * Enter a parse tree produced by the {@code blank}
@@ -48,82 +48,28 @@ public interface RTRegexListener extends ParseTreeListener {
 	void exitGId(@NotNull RTRegexParser.GIdContext ctx);
 
 	/**
-	 * Enter a parse tree produced by the {@code gTry}
-	 * labeled alternative in {@link RTRegexParser#expr}.
+	 * Enter a parse tree produced by {@link RTRegexParser#id}.
 	 * @param ctx the parse tree
 	 */
-	void enterGTry(@NotNull RTRegexParser.GTryContext ctx);
+	void enterId(@NotNull RTRegexParser.IdContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code gTry}
-	 * labeled alternative in {@link RTRegexParser#expr}.
+	 * Exit a parse tree produced by {@link RTRegexParser#id}.
 	 * @param ctx the parse tree
 	 */
-	void exitGTry(@NotNull RTRegexParser.GTryContext ctx);
+	void exitId(@NotNull RTRegexParser.IdContext ctx);
 
 	/**
-	 * Enter a parse tree produced by the {@code gSkip}
+	 * Enter a parse tree produced by the {@code gDecisionMaking}
 	 * labeled alternative in {@link RTRegexParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterGSkip(@NotNull RTRegexParser.GSkipContext ctx);
+	void enterGDecisionMaking(@NotNull RTRegexParser.GDecisionMakingContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code gSkip}
+	 * Exit a parse tree produced by the {@code gDecisionMaking}
 	 * labeled alternative in {@link RTRegexParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitGSkip(@NotNull RTRegexParser.GSkipContext ctx);
-
-	/**
-	 * Enter a parse tree produced by the {@code gTime}
-	 * labeled alternative in {@link RTRegexParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterGTime(@NotNull RTRegexParser.GTimeContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code gTime}
-	 * labeled alternative in {@link RTRegexParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitGTime(@NotNull RTRegexParser.GTimeContext ctx);
-
-	/**
-	 * Enter a parse tree produced by the {@code gOpt}
-	 * labeled alternative in {@link RTRegexParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterGOpt(@NotNull RTRegexParser.GOptContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code gOpt}
-	 * labeled alternative in {@link RTRegexParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitGOpt(@NotNull RTRegexParser.GOptContext ctx);
-
-	/**
-	 * Enter a parse tree produced by the {@code gCard}
-	 * labeled alternative in {@link RTRegexParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterGCard(@NotNull RTRegexParser.GCardContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code gCard}
-	 * labeled alternative in {@link RTRegexParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitGCard(@NotNull RTRegexParser.GCardContext ctx);
-
-	/**
-	 * Enter a parse tree produced by the {@code gAlt}
-	 * labeled alternative in {@link RTRegexParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterGAlt(@NotNull RTRegexParser.GAltContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code gAlt}
-	 * labeled alternative in {@link RTRegexParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitGAlt(@NotNull RTRegexParser.GAltContext ctx);
+	void exitGDecisionMaking(@NotNull RTRegexParser.GDecisionMakingContext ctx);
 
 	/**
 	 * Enter a parse tree produced by the {@code printExpr}

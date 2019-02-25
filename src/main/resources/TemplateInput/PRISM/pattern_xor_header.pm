@@ -1,1 +1,0 @@
-$CONST_PARAM$ int XOR_$GID$;

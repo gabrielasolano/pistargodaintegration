@@ -1,0 +1,1 @@
+[] s$GID$ = 1 -> CTX_$N$ : (s$GID$'= $NEXT_STATE$)  + (1 - CTX_$N$) : (s$GID$'=1);

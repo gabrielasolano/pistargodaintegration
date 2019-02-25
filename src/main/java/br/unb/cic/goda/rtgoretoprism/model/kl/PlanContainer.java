@@ -1,12 +1,16 @@
 package br.unb.cic.goda.rtgoretoprism.model.kl;
 
 import br.unb.cic.goda.model.Plan;
+import br.unb.cic.goda.rtgoretoprism.model.kl.GoalContainer;
 
 import java.util.ArrayList;
 
 public class PlanContainer extends RTContainer {
     private ArrayList<GoalContainer> meGoals;
     private ArrayList<PlanContainer> parentlist;
+	private String costRegex;
+	private String costValue;
+	private String costVariable;
 
     public PlanContainer(Plan p) {
         super(p);
@@ -14,6 +18,14 @@ public class PlanContainer extends RTContainer {
         parentlist = new ArrayList<>();
         this.addFulfillmentConditions(p.getCreationProperty());
     }
+    
+	public PlanContainer(GoalContainer gc) {
+		super();
+		
+		meGoals = new ArrayList<GoalContainer>();
+		meGoals.add(gc);
+		parentlist = null;
+	}
 
     public void addMEGoal(GoalContainer gc) {
         meGoals.add(gc);
@@ -68,4 +80,28 @@ public class PlanContainer extends RTContainer {
         super.setRoot(root);
         setUid(root.getUid());
     }
+    
+	public String getCostRegex() {
+		return costRegex;
+	}
+
+	public void setCostRegex(String costRegex) {
+		this.costRegex = costRegex;
+	}
+
+	public String getCostValue() {
+		return costValue;
+	}
+
+	public void setCostValue(String costValue) {
+		this.costValue = costValue;
+	}
+	
+	public String getCostVariable() {
+		return costVariable;
+	}
+
+	public void setCostVariable(String costVariable) {
+		this.costVariable = costVariable;
+	}
 }

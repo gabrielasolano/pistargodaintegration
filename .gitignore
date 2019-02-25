@@ -5,6 +5,7 @@
 
 # Compiled class file
 *.class
+!dtmc/
 dtmc/*
 
 !target/
@@ -12,6 +13,10 @@ target/*
 !target/generated-sources/
 target/generated-sources/*
 !target/generated-sources/antlr4
+
+bin/
+*.tex
+states
 
 # Log file
 *.log
@@ -35,3 +40,4 @@ target/generated-sources/*
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/target/

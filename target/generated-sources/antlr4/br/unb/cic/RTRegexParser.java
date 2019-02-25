@@ -17,17 +17,15 @@ public class RTRegexParser extends Parser {
 	protected static final PredictionContextCache _sharedContextCache =
 		new PredictionContextCache();
 	public static final int
-		T__5=1, T__4=2, T__3=3, T__2=4, T__1=5, T__0=6, FLOAT=7, SEQ=8, INT=9, 
-		C_SEQ=10, C_RTRY=11, ALT=12, TASK=13, GOAL=14, SKIPP=15, NEWLINE=16, WS=17;
+		T__2=1, T__1=2, T__0=3, FLOAT=4, TASK=5, GOAL=6, X=7, NEWLINE=8, WS=9;
 	public static final String[] tokenNames = {
-		"<INVALID>", "'try('", "'opt('", "':'", "'?'", "'('", "')'", "FLOAT", 
-		"';'", "'#'", "'+'", "'@'", "'|'", "'T'", "'G'", "'skip'", "NEWLINE", 
+		"<INVALID>", "'DM('", "')'", "','", "FLOAT", "'T'", "'G'", "'X'", "NEWLINE", 
 		"WS"
 	};
 	public static final int
-		RULE_rt = 0, RULE_expr = 1;
+		RULE_rt = 0, RULE_expr = 1, RULE_id = 2;
 	public static final String[] ruleNames = {
-		"rt", "expr"
+		"rt", "expr", "id"
 	};
 
 	@Override
@@ -102,26 +100,23 @@ public class RTRegexParser extends Parser {
 		RtContext _localctx = new RtContext(_ctx, getState());
 		enterRule(_localctx, 0, RULE_rt);
 		try {
-			setState(8);
+			setState(10);
 			switch (_input.LA(1)) {
-			case T__5:
-			case T__4:
-			case T__1:
+			case T__2:
 			case TASK:
 			case GOAL:
-			case SKIPP:
 				_localctx = new PrintExprContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(4); expr(0);
-				setState(5); match(NEWLINE);
+				setState(6); expr(0);
+				setState(7); match(NEWLINE);
 				}
 				break;
 			case NEWLINE:
 				_localctx = new BlankContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(7); match(NEWLINE);
+				setState(9); match(NEWLINE);
 				}
 				break;
 			default:
@@ -150,28 +145,34 @@ public class RTRegexParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
-	public static class ParensContext extends ExprContext {
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
+	public static class GDMContext extends ExprContext {
+		public Token op;
+		public List<ExprContext> expr() {
+			return getRuleContexts(ExprContext.class);
 		}
-		public ParensContext(ExprContext ctx) { copyFrom(ctx); }
+		public ExprContext expr(int i) {
+			return getRuleContext(ExprContext.class,i);
+		}
+		public GDMContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterParens(this);
+			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterGDM(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitParens(this);
+			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitGDM(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitParens(this);
+			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitGDM(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 	public static class GIdContext extends ExprContext {
 		public Token t;
-		public TerminalNode FLOAT() { return getToken(RTRegexParser.FLOAT, 0); }
+		public IdContext id() {
+			return getRuleContext(IdContext.class,0);
+		}
 		public GIdContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -187,128 +188,22 @@ public class RTRegexParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
-	public static class GTryContext extends ExprContext {
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public GTryContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterGTry(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitGTry(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitGTry(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class GSkipContext extends ExprContext {
-		public TerminalNode SKIPP() { return getToken(RTRegexParser.SKIPP, 0); }
-		public GSkipContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterGSkip(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitGSkip(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitGSkip(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class GTimeContext extends ExprContext {
-		public Token op;
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public GTimeContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterGTime(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitGTime(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitGTime(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class GOptContext extends ExprContext {
+	public static class GDecisionMakingContext extends ExprContext {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
 		}
-		public GOptContext(ExprContext ctx) { copyFrom(ctx); }
+		public GDecisionMakingContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterGOpt(this);
+			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterGDecisionMaking(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitGOpt(this);
+			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitGDecisionMaking(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitGOpt(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class GCardContext extends ExprContext {
-		public Token op;
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
-		public TerminalNode FLOAT() { return getToken(RTRegexParser.FLOAT, 0); }
-		public GCardContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterGCard(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitGCard(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitGCard(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-	public static class GAltContext extends ExprContext {
-		public Token op;
-		public List<ExprContext> expr() {
-			return getRuleContexts(ExprContext.class);
-		}
-		public ExprContext expr(int i) {
-			return getRuleContext(ExprContext.class,i);
-		}
-		public GAltContext(ExprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterGAlt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitGAlt(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitGAlt(this);
+			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitGDecisionMaking(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -329,131 +224,60 @@ public class RTRegexParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(30);
+			setState(19);
 			switch (_input.LA(1)) {
-			case T__4:
-				{
-				_localctx = new GOptContext(_localctx);
-				_ctx = _localctx;
-				_prevctx = _localctx;
-
-				setState(11); match(T__4);
-				setState(12); expr(0);
-				setState(13); match(T__0);
-				}
-				break;
-			case T__5:
-				{
-				_localctx = new GTryContext(_localctx);
-				_ctx = _localctx;
-				_prevctx = _localctx;
-				setState(15); match(T__5);
-				setState(16); expr(0);
-				setState(17); match(T__0);
-				setState(18); match(T__2);
-				setState(19); expr(0);
-				setState(20); match(T__3);
-				setState(21); expr(0);
-				}
-				break;
-			case SKIPP:
-				{
-				_localctx = new GSkipContext(_localctx);
-				_ctx = _localctx;
-				_prevctx = _localctx;
-				setState(23); match(SKIPP);
-				}
-				break;
 			case TASK:
 			case GOAL:
 				{
 				_localctx = new GIdContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(24);
+
+				setState(13);
 				((GIdContext)_localctx).t = _input.LT(1);
 				_la = _input.LA(1);
 				if ( !(_la==TASK || _la==GOAL) ) {
 					((GIdContext)_localctx).t = (Token)_errHandler.recoverInline(this);
 				}
 				consume();
-				setState(25); match(FLOAT);
+				setState(14); id();
 				}
 				break;
-			case T__1:
+			case T__2:
 				{
-				_localctx = new ParensContext(_localctx);
+				_localctx = new GDecisionMakingContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(26); match(T__1);
-				setState(27); expr(0);
-				setState(28); match(T__0);
+				setState(15); match(T__2);
+				setState(16); expr(0);
+				setState(17); match(T__1);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(43);
+			setState(26);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(41);
-					switch ( getInterpreter().adaptivePredict(_input,2,_ctx) ) {
-					case 1:
-						{
-						_localctx = new GAltContext(new ExprContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(32);
-						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(33); ((GAltContext)_localctx).op = match(ALT);
-						setState(34); expr(8);
-						}
-						break;
-
-					case 2:
-						{
-						_localctx = new GTimeContext(new ExprContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(35);
-						if (!(precpred(_ctx, 4))) throw new FailedPredicateException(this, "precpred(_ctx, 4)");
-						setState(36);
-						((GTimeContext)_localctx).op = _input.LT(1);
-						_la = _input.LA(1);
-						if ( !(_la==SEQ || _la==INT) ) {
-							((GTimeContext)_localctx).op = (Token)_errHandler.recoverInline(this);
-						}
-						consume();
-						setState(37); expr(5);
-						}
-						break;
-
-					case 3:
-						{
-						_localctx = new GCardContext(new ExprContext(_parentctx, _parentState));
-						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(38);
-						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(39);
-						((GCardContext)_localctx).op = _input.LT(1);
-						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << INT) | (1L << C_SEQ) | (1L << C_RTRY))) != 0)) ) {
-							((GCardContext)_localctx).op = (Token)_errHandler.recoverInline(this);
-						}
-						consume();
-						setState(40); match(FLOAT);
-						}
-						break;
+					{
+					_localctx = new GDMContext(new ExprContext(_parentctx, _parentState));
+					pushNewRecursionContext(_localctx, _startState, RULE_expr);
+					setState(21);
+					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
+					setState(22); ((GDMContext)_localctx).op = match(T__0);
+					setState(23); expr(2);
 					}
 					} 
 				}
-				setState(45);
+				setState(28);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,3,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,2,_ctx);
 			}
 			}
 		}
@@ -468,6 +292,68 @@ public class RTRegexParser extends Parser {
 		return _localctx;
 	}
 
+	public static class IdContext extends ParserRuleContext {
+		public TerminalNode X() { return getToken(RTRegexParser.X, 0); }
+		public TerminalNode FLOAT() { return getToken(RTRegexParser.FLOAT, 0); }
+		public IdContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_id; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).enterId(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof RTRegexListener ) ((RTRegexListener)listener).exitId(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof RTRegexVisitor ) return ((RTRegexVisitor<? extends T>)visitor).visitId(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final IdContext id() throws RecognitionException {
+		IdContext _localctx = new IdContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_id);
+		try {
+			setState(33);
+			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(29); match(FLOAT);
+				}
+				break;
+
+			case 2:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(30); match(FLOAT);
+				setState(31); match(X);
+				}
+				break;
+
+			case 3:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(32); match(X);
+				}
+				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
 		case 1: return expr_sempred((ExprContext)_localctx, predIndex);
@@ -476,30 +362,23 @@ public class RTRegexParser extends Parser {
 	}
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 0: return precpred(_ctx, 7);
-
-		case 1: return precpred(_ctx, 4);
-
-		case 2: return precpred(_ctx, 8);
+		case 0: return precpred(_ctx, 1);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\23\61\4\2\t\2\4\3"+
-		"\t\3\3\2\3\2\3\2\3\2\5\2\13\n\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3!\n\3\3\3\3\3\3\3\3\3\3"+
-		"\3\3\3\3\3\3\3\3\3\7\3,\n\3\f\3\16\3/\13\3\3\3\2\3\4\4\2\4\2\5\3\2\17"+
-		"\20\3\2\n\13\3\2\13\r\66\2\n\3\2\2\2\4 \3\2\2\2\6\7\5\4\3\2\7\b\7\22\2"+
-		"\2\b\13\3\2\2\2\t\13\7\22\2\2\n\6\3\2\2\2\n\t\3\2\2\2\13\3\3\2\2\2\f\r"+
-		"\b\3\1\2\r\16\7\4\2\2\16\17\5\4\3\2\17\20\7\b\2\2\20!\3\2\2\2\21\22\7"+
-		"\3\2\2\22\23\5\4\3\2\23\24\7\b\2\2\24\25\7\6\2\2\25\26\5\4\3\2\26\27\7"+
-		"\5\2\2\27\30\5\4\3\2\30!\3\2\2\2\31!\7\21\2\2\32\33\t\2\2\2\33!\7\t\2"+
-		"\2\34\35\7\7\2\2\35\36\5\4\3\2\36\37\7\b\2\2\37!\3\2\2\2 \f\3\2\2\2 \21"+
-		"\3\2\2\2 \31\3\2\2\2 \32\3\2\2\2 \34\3\2\2\2!-\3\2\2\2\"#\f\t\2\2#$\7"+
-		"\16\2\2$,\5\4\3\n%&\f\6\2\2&\'\t\3\2\2\',\5\4\3\7()\f\n\2\2)*\t\4\2\2"+
-		"*,\7\t\2\2+\"\3\2\2\2+%\3\2\2\2+(\3\2\2\2,/\3\2\2\2-+\3\2\2\2-.\3\2\2"+
-		"\2.\5\3\2\2\2/-\3\2\2\2\6\n +-";
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\13&\4\2\t\2\4\3\t"+
+		"\3\4\4\t\4\3\2\3\2\3\2\3\2\5\2\r\n\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\26"+
+		"\n\3\3\3\3\3\3\3\7\3\33\n\3\f\3\16\3\36\13\3\3\4\3\4\3\4\3\4\5\4$\n\4"+
+		"\3\4\2\3\4\5\2\4\6\2\3\3\2\7\b\'\2\f\3\2\2\2\4\25\3\2\2\2\6#\3\2\2\2\b"+
+		"\t\5\4\3\2\t\n\7\n\2\2\n\r\3\2\2\2\13\r\7\n\2\2\f\b\3\2\2\2\f\13\3\2\2"+
+		"\2\r\3\3\2\2\2\16\17\b\3\1\2\17\20\t\2\2\2\20\26\5\6\4\2\21\22\7\3\2\2"+
+		"\22\23\5\4\3\2\23\24\7\4\2\2\24\26\3\2\2\2\25\16\3\2\2\2\25\21\3\2\2\2"+
+		"\26\34\3\2\2\2\27\30\f\3\2\2\30\31\7\5\2\2\31\33\5\4\3\4\32\27\3\2\2\2"+
+		"\33\36\3\2\2\2\34\32\3\2\2\2\34\35\3\2\2\2\35\5\3\2\2\2\36\34\3\2\2\2"+
+		"\37$\7\6\2\2 !\7\6\2\2!$\7\t\2\2\"$\7\t\2\2#\37\3\2\2\2# \3\2\2\2#\"\3"+
+		"\2\2\2$\7\3\2\2\2\6\f\25\34#";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

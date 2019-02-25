@@ -1,6 +1,7 @@
 package br.unb.cic.goda.rtgoretoprism.model.kl;
 
 import br.unb.cic.goda.rtgoretoprism.util.NameUtility;
+import br.unb.cic.goda.rtgoretoprism.model.kl.SoftgoalContainer;
 import br.unb.cic.goda.model.GeneralEntity;
 
 import java.util.Hashtable;
@@ -18,6 +19,10 @@ public class ElementContainer {
         this.name = NameUtility.adjustName(m.getName());
         contributions = new Hashtable<>();
     }
+    
+	public ElementContainer() {
+		contributions = new Hashtable<SoftgoalContainer, String>();
+	}
 
     public String getName() {
         return name;
